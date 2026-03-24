@@ -1,0 +1,247 @@
+/* ============================================================
+   WEATHER APP — Glassmorphism UI
+   Structure: input + button + #container only
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap');
+
+/* ── Variables ── */
+:root {
+  --accent-blue:   #4fc3f7;
+  --accent-cyan:   #00e5ff;
+  --accent-violet: #7c4dff;
+  --glass-bg:      rgba(255, 255, 255, 0.07);
+  --glass-border:  rgba(255, 255, 255, 0.15);
+  --text-primary:  #e8f4fd;
+  --text-muted:    rgba(232, 244, 253, 0.4);
+  --glow-cyan:     0 0 28px rgba(0, 229, 255, 0.28);
+  --radius-lg:     16px;
+  --radius-xl:     22px;
+  --transition:    0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ── Reset ── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ── Body — Cosmic Night Sky ── */
+body {
+  font-family: 'Outfit', sans-serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;
+  padding: 2rem 1rem;
+  color: var(--text-primary);
+  position: relative;
+  overflow-x: hidden;
+  background: #0a0e27;
+}
+
+/* Gradient blobs */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 70% 55% at 15% 10%,  rgba(124, 77, 255, 0.2)  0%, transparent 60%),
+    radial-gradient(ellipse 60% 70% at 85% 90%,  rgba(79, 195, 247, 0.18) 0%, transparent 60%),
+    radial-gradient(ellipse 100% 100% at 50% 50%, #0d1b3e 0%, #0a0e27 100%);
+  z-index: -2;
+}
+
+/* Star field */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    radial-gradient(1px 1px at 12% 18%, rgba(255,255,255,0.75) 0%, transparent 100%),
+    radial-gradient(1px 1px at 38% 72%, rgba(255,255,255,0.5)  0%, transparent 100%),
+    radial-gradient(1px 1px at 63% 12%, rgba(255,255,255,0.65) 0%, transparent 100%),
+    radial-gradient(1px 1px at 82% 52%, rgba(255,255,255,0.45) 0%, transparent 100%),
+    radial-gradient(1px 1px at 27% 88%, rgba(255,255,255,0.55) 0%, transparent 100%),
+    radial-gradient(1.5px 1.5px at 70% 35%, rgba(255,255,255,0.6) 0%, transparent 100%),
+    radial-gradient(1px 1px at 50% 58%, rgba(255,255,255,0.4)  0%, transparent 100%),
+    radial-gradient(1px 1px at 91% 22%, rgba(255,255,255,0.5)  0%, transparent 100%),
+    radial-gradient(1px 1px at  8% 45%, rgba(255,255,255,0.45) 0%, transparent 100%),
+    radial-gradient(1px 1px at 45% 95%, rgba(255,255,255,0.4)  0%, transparent 100%);
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* ── Input ── */
+#input {
+  width: min(520px, 90vw);
+  padding: 0.95rem 1.3rem;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  color: var(--text-primary);
+  font-family: 'Outfit', sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
+  outline: none;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  transition: border-color var(--transition), box-shadow var(--transition), background var(--transition);
+  animation: fadeDown 0.6s ease both;
+}
+
+#input::placeholder {
+  color: var(--text-muted);
+  font-weight: 300;
+}
+
+#input:focus {
+  border-color: var(--accent-cyan);
+  background: rgba(255, 255, 255, 0.11);
+  box-shadow: var(--glow-cyan), inset 0 0 0 1px rgba(0, 229, 255, 0.08);
+}
+
+/* ── Button ── */
+button {
+  padding: 0.9rem 2.2rem;
+  background: linear-gradient(135deg, var(--accent-blue), var(--accent-violet));
+  border: none;
+  border-radius: var(--radius-lg);
+  color: #fff;
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.98rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: transform var(--transition), box-shadow var(--transition);
+  box-shadow: 0 4px 24px rgba(79, 195, 247, 0.25), 0 2px 8px rgba(0, 0, 0, 0.35);
+  animation: fadeDown 0.6s ease 0.1s both;
+}
+
+button::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.18), transparent);
+  opacity: 0;
+  transition: opacity var(--transition);
+}
+
+button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(79, 195, 247, 0.42), 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+button:hover::before { opacity: 1; }
+
+button:active {
+  transform: translateY(0) scale(0.97);
+}
+
+/* ── #container ── */
+#container {
+  width: min(520px, 90vw);
+  animation: fadeUp 0.55s ease both;
+}
+
+/* Paragraph tags injected by JS */
+#container p {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-xl);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  padding: 1.4rem 1.75rem;
+  margin-bottom: 0.75rem;
+  font-family: 'Space Mono', monospace;
+  font-size: 1.05rem;
+  color: var(--text-primary);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    0 0 18px rgba(79, 195, 247, 0.1);
+  position: relative;
+  overflow: hidden;
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+
+/* Shimmer top line on each card */
+#container p::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(79, 195, 247, 0.55), rgba(124, 77, 255, 0.45), transparent);
+}
+
+#container p:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 12px 40px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12),
+    0 0 28px rgba(79, 195, 247, 0.18);
+}
+
+/* First p — city name */
+#container p:first-child {
+  font-size: 1.3rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  background-color: rgba(255, 255, 255, 0.05);
+  color: #fff;
+}
+
+/* Second p — temperature, big accent */
+#container p:nth-child(2) {
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: var(--accent-cyan);
+  text-shadow: 0 0 20px rgba(0, 229, 255, 0.45);
+  letter-spacing: -0.02em;
+}
+
+/* Third p — humidity / extra data */
+#container p:nth-child(3) {
+  font-size: 1rem;
+  color: rgba(232, 244, 253, 0.75);
+  font-weight: 400;
+}
+
+/* ── Animations ── */
+@keyframes fadeDown {
+  from { opacity: 0; transform: translateY(-16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Responsive ── */
+@media (max-width: 480px) {
+  body {
+    justify-content: flex-start;
+    padding-top: 3rem;
+    gap: 1rem;
+  }
+
+  #input,
+  #container {
+    width: 92vw;
+  }
+
+  button {
+    width: 92vw;
+    padding: 0.9rem;
+  }
+
+  #container p:nth-child(2) {
+    font-size: 1.9rem;
+  }
+}
