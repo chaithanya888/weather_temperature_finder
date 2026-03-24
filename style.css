@@ -208,7 +208,7 @@ button:active {
 /* Third p — humidity / extra data */
 #container p:nth-child(3) {
   font-size: 2rem;
-  color: rgba(45, 111, 203, 0.75);
+  color: rgba(0, 255, 213, 0.75);
   font-weight: 400;
 }
 
