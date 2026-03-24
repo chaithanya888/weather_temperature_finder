@@ -29,9 +29,9 @@ try {
 
 function useData(data,city){
 container.innerHTML=`
-<p>Wether in ${city}</p>
+<p>Weather in ${city}</p>
 <p>Temperature :${data.main.temp}</p>
-<p>Humidityv:${data.main.humidity}</p>
+<p>Humidity:${data.main.humidity}</p>
 `
 }
 
